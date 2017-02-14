@@ -62,7 +62,7 @@ func TestServerJsonOutputImages(t *testing.T) {
 	}
 	
 	// Compares the dimensions of each image with the dimensions described on the image name.
-  // Fails if any mismatch occurs.
+ 	// Fails if any mismatch occurs.
 	for _, resp := range response {
 		size, err := getImageSizeFromName(resp.Name)
 		if err != nil {
@@ -74,19 +74,19 @@ func TestServerJsonOutputImages(t *testing.T) {
 		respimg, err := http.Get(imgurl)
 		if err != nil {
 			t.Fatalf("Can't get the image %v, %v!", imgurl, err)
-    }
+    		}
 		defer respimg.Body.Close()
 		
 		// Decodes as jpeg and gets its config.
 		imgconfig, err := jpeg.DecodeConfig(respimg.Body)
-    if err != nil {
-    	t.Fatalf("Can't decode image %v as jpeg, %v!", imgurl, err)
-    }
- 		
- 		// Compare dimensions.   
-    if imgconfig.Width != int(size.width) || imgconfig.Height != int(size.height) {
-    	t.Fatalf("Wrong image %v dimensions! Expected %vx%v, got %vx%v, for image %v.", imgurl, size.width, size.height, 
-    																																							 imgconfig.Width, imgconfig.Height)
-    }
+		if err != nil {
+			t.Fatalf("Can't decode image %v as jpeg, %v!", imgurl, err)
+		}
+
+		// Compare dimensions.   
+		if imgconfig.Width != int(size.width) || imgconfig.Height != int(size.height) {
+			t.Fatalf("Wrong image %v dimensions! Expected %vx%v, got %vx%v, for image %v.", imgurl, size.width, size.height, 
+				 									imgconfig.Width, imgconfig.Height)
+		 }
 	}
 }
