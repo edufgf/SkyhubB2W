@@ -43,7 +43,7 @@ type SkyhubResponse struct {
   Images []Url
 }
 
-// Document definition for the database. Image name and it's URL to
+// Document definition for the database. Image name and its URL to
 // image location on the local file system.
 type MongoDocument struct {
 	Name, Url string
